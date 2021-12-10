@@ -1,19 +1,17 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:purple_star/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'allow_notification.dart';
-import 'home.dart';
 
-class AgeRestrictPage extends StatefulWidget {
-  const AgeRestrictPage({Key? key}) : super(key: key);
+class AllowNotificationPage extends StatefulWidget {
+  const AllowNotificationPage({Key? key}) : super(key: key);
 
   @override
-  _AgeRestrictPageState createState() => _AgeRestrictPageState();
+  _AllowNotificationPageState createState() => _AllowNotificationPageState();
 }
 
-class _AgeRestrictPageState extends State<AgeRestrictPage> {
+class _AllowNotificationPageState extends State<AllowNotificationPage> {
   Future<bool> isFirstTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var isFirstTime = prefs.getBool('first_time');
@@ -33,21 +31,22 @@ class _AgeRestrictPageState extends State<AgeRestrictPage> {
       isFirstTime().then((isFirstTime) {
         isFirstTime
             ? Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => IntroScreen()))
+            MaterialPageRoute(builder: (context) => NotificationScreen()))
             : Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const AllowNotificationPage()));
+            MaterialPageRoute(builder: (context) => const HomePage()));
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return IntroScreen();
+    return NotificationScreen();
   }
 }
 
+
 // ignore: use_key_in_widget_constructors
-class IntroScreen extends StatelessWidget {
+class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,13 +55,11 @@ class IntroScreen extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/image/psmd_logo.jpg"),
-                fit: BoxFit.contain,
+                image: AssetImage("assets/image/homeBG.jpg"),
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          // Center(
-          //   child:
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(top: 70),
@@ -92,14 +89,10 @@ class IntroScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const Text(
-                        'Cannabis Dispensary',
-                        style: TextStyle(fontFamily: 'Poppins'),
-                      ),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(40, 40, 40, 20),
                         child: Text(
-                          'You must be at least 21 years of age to view this app.',
+                          'Purple Star uses notifications to help you stay on top of:',
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 17,
@@ -107,13 +100,16 @@ class IntroScreen extends StatelessWidget {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                        child: Text(
-                          'By accessing this app, you accept the Terms of Use and Privacy Policy.',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 12,
-                              fontWeight: FontWeight.w100),
+                        padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            '\u2022 Lates deals\n\u2022 Personalised offers\n\u2022 Expiry reminders, and more',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 12,
+                                fontWeight: FontWeight.w100),
+                          ),
                         ),
                       ),
                       Padding(
@@ -128,7 +124,7 @@ class IntroScreen extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(20))),
                             child: const Center(
                                 child: Text(
-                                  'i\'m at least 21 years old',
+                                  'allow',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'BebasNeue',
@@ -139,7 +135,8 @@ class IntroScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const AllowNotificationPage()),
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
                             );
                           },
                         ),
@@ -149,7 +146,7 @@ class IntroScreen extends StatelessWidget {
                         child: InkWell(
                           child: const Center(
                             child: Text(
-                              'i\'m not 21 yet',
+                              'not yet',
                               style: TextStyle(
                                 fontFamily: 'BebasNeue',
                                 fontSize: 20,
@@ -157,7 +154,11 @@ class IntroScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            exit(0);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>const HomePage()),
+                            );
                           },
                         ),
                       ),
