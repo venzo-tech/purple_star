@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:purple_star/screens/sign_in.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -242,7 +243,7 @@ class _RegisterState extends State<Register> {
                       print('Sign Up Pressed');
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Register()),
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
                       );
                     },
                     child: RichText(
