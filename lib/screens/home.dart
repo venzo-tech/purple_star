@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:purple_star/screens/cart.dart';
 import 'package:purple_star/screens/sales.dart';
-import 'package:purple_star/screens/test.dart';
+import 'package:purple_star/screens/menu_page.dart';
 
 import 'home_page.dart';
 
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-  final screen = [MainHomePage(), Sales(), Cart(), TestPage()];
+  final screen = [MainHomePage(), Sales(), Cart(), MenuPage()];
 
   @override
   Widget build(BuildContext context) {
