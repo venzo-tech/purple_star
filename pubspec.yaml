@@ -79,6 +79,16 @@ flutter:
     - assets/image/deals_2.jpeg
     - assets/image/deals_3.jpeg
     - assets/image/deals_4.jpeg
+    - assets/image/cate-accessories.jpeg
+    - assets/image/cate-concentrates.jpeg
+    - assets/image/cate-edibles.jpeg
+    - assets/image/cate-prerolls.jpeg
+    - assets/image/cate-flowers.jpeg
+    - assets/image/cate-tinctures.jpeg
+    - assets/image/cate-topicals.jpeg
+    - assets/image/cate-vape_pens.jpeg
+    - assets/image/cate-sale.jpeg
+
 
 
 flutter_native_splash:
