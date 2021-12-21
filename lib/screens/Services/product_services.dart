@@ -3,7 +3,7 @@ import 'package:purple_star/screens/Model/product_model.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<Product>> fetchProduct() async {
-  var URL = Uri.parse('https://mocki.io/v1/697e4dbb-7c67-4c3a-8f95-23a3a37810ed');
+  var URL = Uri.parse('https://mocki.io/v1/1526d720-34ec-49e0-8b32-f84e74171973');
 
   final response = await http.get(URL);
 

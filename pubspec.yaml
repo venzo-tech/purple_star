@@ -75,6 +75,10 @@ flutter:
     - assets/image/psmd_logo.jpg
     - assets/image/psmd_logo.png
     - assets/image/homeBG.jpg
+    - assets/image/deals_1.jpeg
+    - assets/image/deals_2.jpeg
+    - assets/image/deals_3.jpeg
+    - assets/image/deals_4.jpeg
 
 
 flutter_native_splash:
