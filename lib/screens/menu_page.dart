@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:purple_star/screens/Drawer%20Menu/about.dart';
 import 'package:purple_star/screens/Drawer%20Menu/account.dart';
-import 'package:purple_star/screens/Drawer%20Menu/blog.dart';
+import 'package:purple_star/screens/Drawer%20Menu/Blog/blog.dart';
 import 'package:purple_star/screens/Drawer%20Menu/help.dart';
 import 'package:purple_star/screens/Drawer%20Menu/order_history.dart';
 import 'package:purple_star/screens/Drawer%20Menu/settings.dart';
@@ -233,7 +233,7 @@ class _MenuPageState extends State<MenuPage> {
                             ),
                           ),
                         ),
-                        const Divider(indent: 0, height: 1, color: Colors.grey),
+                        const Divider(indent: 0, height: 1, color: Color(0xffa3a3a3)),
                       ],
                     ),
               ],
