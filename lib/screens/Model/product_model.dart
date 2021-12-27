@@ -26,6 +26,7 @@ class Product {
     required this.title,
     required this.made,
     required this.productImageUrl,
+    required this.strains,
     required this.productQty,
   });
 
@@ -33,6 +34,7 @@ class Product {
   String title;
   String made;
   String productImageUrl;
+  String strains;
   ProductQty productQty;
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
@@ -40,24 +42,6 @@ class Product {
       title: json["title"],
       made: json["made"],
       productImageUrl: json["productImageUrl"],
+      strains: json["strains"],
       productQty: ProductQty.fromJson(json["productQty"]));
 }
-
-// class ProductQty {
-//   ProductQty({
-//     required this.qty1, required this.qty2, required this.qty3,
-//   });
-//
-//   var qty1;
-//   var qty2;
-//   var qty3;
-//
-//   factory ProductQty.fromMap(Map<String, dynamic> json) {
-//     return ProductQty(
-//       qty1: json["qty1"],
-//       qty2: json["qty2"],
-//       qty3: json["qty3"],
-//     );
-//   }
-// }
-
