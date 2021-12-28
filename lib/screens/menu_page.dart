@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:purple_star/screens/Drawer%20Menu/about.dart';
 import 'package:purple_star/screens/Drawer%20Menu/account.dart';
 import 'package:purple_star/screens/Drawer%20Menu/Blog/blog.dart';
-import 'package:purple_star/screens/Drawer%20Menu/help.dart';
+import 'package:purple_star/screens/Drawer%20Menu/Help/help.dart';
 import 'package:purple_star/screens/Drawer%20Menu/order_history.dart';
 import 'package:purple_star/screens/Drawer%20Menu/settings.dart';
 import 'package:purple_star/screens/Drawer%20Menu/shop/concentrates.dart';
