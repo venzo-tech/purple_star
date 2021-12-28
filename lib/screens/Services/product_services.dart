@@ -8,9 +8,8 @@ Future<List<Product>> fetchProduct() async {
   final response = await http.get(URL);
 
   if (response.statusCode == 200) {
-    // print(response.body);
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-    print(parsed);
+    // print(parsed);
     return parsed.map<Product>((json) => Product.fromMap(json)).toList();
   } else {
     throw Exception('Failed to load Products');

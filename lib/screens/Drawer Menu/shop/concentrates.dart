@@ -18,8 +18,6 @@ class _ConcentratesState extends State<Concentrates> {
   void initState() {
     super.initState();
     futureProduct = fetchProduct();
-    // print(futureProduct);
-    // print(futureProduct.toString());
   }
 
   @override
@@ -117,90 +115,92 @@ class _ConcentratesState extends State<Concentrates> {
                       ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        physics: ScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) => Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                padding: const EdgeInsets.all(5.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              0.0), //or 15.0
-                                          child: Container(
-                                            height: 100.0,
-                                            width: 100.0,
-                                            child: Image(
-                                              image: NetworkImage(snapshot
-                                                  .data![index]
-                                                  .productImageUrl),
-                                            ),
+                        itemBuilder: (_, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            0.0), //or 15.0
+                                        child: SizedBox(
+                                          height: 100.0,
+                                          width: 100.0,
+                                          child: Image(
+                                            image: NetworkImage(snapshot
+                                                .data![index].productImageUrl),
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              snapshot.data![index].title,
-                                              style: const TextStyle(
-                                                fontFamily: 'Poppins Bold',
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            snapshot.data![index].title,
+                                            style: const TextStyle(
+                                              fontFamily: 'Poppins Bold',
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            Text(
-                                              '- ' + snapshot.data![index].made,
-                                              style: const TextStyle(
-                                                fontFamily: 'Poppins Bold',
-                                                fontSize: 15.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          ),
+                                          Text(
+                                            '- ' + snapshot.data![index].made,
+                                            style: const TextStyle(
+                                              fontFamily: 'Poppins Bold',
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                            const SizedBox(height: 10),
-                                            DropdownButtonHideUnderline(
-                                              child: DropdownButton<String>(
-                                                // isExpanded: true,
-                                                items: <String>[
-                                                  snapshot.data![index]
-                                                      .productQty.qty1,
-                                                  snapshot.data![index]
-                                                      .productQty.qty2,
-                                                  snapshot.data![index]
-                                                      .productQty.qty3,
-                                                ].map((dropdownValue) {
-                                                  // print(dropdownValue);
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: dropdownValue,
-                                                    child: Text(dropdownValue),
-                                                  );
-                                                }).toList(),
-                                                onChanged:
-                                                    (String? newDropdownValue) {
-                                                  setState(() {
-                                                    dropdownValue =
-                                                        newDropdownValue;
-                                                    print(dropdownValue);
-                                                  });
-                                                },
-                                                value: dropdownValue,
-                                              ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          DropdownButtonHideUnderline(
+                                            child: DropdownButton<String>(
+                                              // isExpanded: true,
+                                              items: <String>[
+                                                snapshot.data![index].productQty
+                                                    .qty1,
+                                                snapshot.data![index].productQty
+                                                    .qty2,
+                                                snapshot.data![index].productQty
+                                                    .qty3,
+                                              ].map((dropdownValue) {
+                                                // print(dropdownValue);
+                                                return DropdownMenuItem<String>(
+                                                  value: dropdownValue,
+                                                  child: Text(dropdownValue),
+                                                );
+                                              }).toList(),
+                                              onChanged:
+                                                  (String? newDropdownValue) {
+                                                setState(() {
+                                                  dropdownValue =
+                                                      newDropdownValue;
+                                                  print(dropdownValue);
+                                                });
+                                              },
+                                              value: dropdownValue,
                                             ),
-                                            const SizedBox(height: 10),
-                                            Container(
+                                          ),
+                                          const SizedBox(height: 10),
+                                          InkWell(
+                                            onTap: () {
+                                              AddToBasket();
+                                            },
+                                            child: Container(
                                               width: 125,
                                               height: 30,
                                               decoration: BoxDecoration(
@@ -209,7 +209,7 @@ class _ConcentratesState extends State<Concentrates> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20.0)),
-                                              child:const Center(
+                                              child: const Center(
                                                   child: Text(
                                                 'add to cart',
                                                 style: TextStyle(
@@ -218,24 +218,24 @@ class _ConcentratesState extends State<Concentrates> {
                                                     color: Colors.white),
                                               )),
                                             ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
                               ),
-                              const Divider(
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
+                            ),
+                            const Divider(
+                              color: Colors.grey,
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),
@@ -244,4 +244,65 @@ class _ConcentratesState extends State<Concentrates> {
       ),
     );
   }
+}
+
+ AddToBasket() {
+  showModalBottomSheet(
+    backgroundColor: Colors.transparent,
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          height: MediaQuery.of(context).size.height * .80,
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.0),
+                  topRight: Radius.circular(15.0))),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Text(
+                  'added to basket',
+                  style: TextStyle(fontFamily: 'BebasNeue', fontSize: 23),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+                    child: const Text('Proceed to checkout',
+                        style:
+                            TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: const Color(0xFF562c8a),
+                      side: const BorderSide(
+                          width: 2.0, color: Color(0xFF562c8a)),
+                      shape: const StadiumBorder(),
+                    ),
+                    child: const Text('Continue shopping',
+                        style:
+                            TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
