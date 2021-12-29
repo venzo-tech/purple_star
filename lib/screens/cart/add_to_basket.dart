@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:purple_star/screens/Model/product_model.dart';
+import 'package:purple_star/screens/cart/cart_page.dart';
 
 Future<void> AddToBasket( BuildContext context,Product product) async {
   showModalBottomSheet<void>(
+    isScrollControlled: true,
     backgroundColor: Colors.transparent,
     context: context,
     builder: (BuildContext context) {
       return Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
-          height: MediaQuery.of(context).size.height * .80,
+          height: MediaQuery.of(context).size.height * .70,
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -24,8 +27,12 @@ Future<void> AddToBasket( BuildContext context,Product product) async {
                   'added to basket',
                   style: TextStyle(fontFamily: 'BebasNeue', fontSize: 23),
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     ClipRRect(
                       borderRadius: BorderRadius.circular(
@@ -38,12 +45,15 @@ Future<void> AddToBasket( BuildContext context,Product product) async {
                         ),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(product.title),
-                        Text('-'+product.made),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(product.title),
+                          Text('-'+product.made),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -57,7 +67,12 @@ Future<void> AddToBasket( BuildContext context,Product product) async {
                     child: const Text('Proceed to checkout',
                         style:
                         TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CartProductPage()),
+                      );
+                    },
                   ),
                 ),
                 SizedBox(

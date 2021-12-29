@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:purple_star/screens/Model/product_model.dart';
 import 'package:purple_star/screens/Services/product_services.dart';
-import 'package:purple_star/screens/cart/add_cart_page.dart';
+import 'package:purple_star/screens/cart/add_to_basket.dart';
 
 class Concentrates extends StatefulWidget {
   const Concentrates({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class Concentrates extends StatefulWidget {
 
 class _ConcentratesState extends State<Concentrates> {
   late Future<List<Product>> futureProduct;
-  String? dropdownValue;
+   String? dropdownValue;
 
   @override
   void initState() {
@@ -118,120 +118,124 @@ class _ConcentratesState extends State<Concentrates> {
                         shrinkWrap: true,
                         physics: const ScrollPhysics(),
                         itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(
-                                            0.0), //or 15.0
-                                        child: SizedBox(
-                                          height: 100.0,
-                                          width: 100.0,
-                                          child: Image(
-                                            image: NetworkImage(snapshot
-                                                .data![index].productImageUrl),
+                        itemBuilder: (_, index) =>
+                            Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              0.0), //or 15.0
+                                          child: SizedBox(
+                                            height: 100.0,
+                                            width: 100.0,
+                                            child: Image(
+                                              image: NetworkImage(snapshot
+                                                  .data![index].productImageUrl),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data![index].title,
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins Bold',
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
+                                        Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot.data![index].title,
+                                              style: const TextStyle(
+                                                fontFamily: 'Poppins Bold',
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            '- ' + snapshot.data![index].made,
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins Bold',
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.bold,
+                                            Text(
+                                              '- ' + snapshot.data![index].made,
+                                              style: const TextStyle(
+                                                fontFamily: 'Poppins Bold',
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          DropdownButtonHideUnderline(
-                                            child: DropdownButton<String>(
-                                              // isExpanded: true,
-                                              items: <String>[
-                                                snapshot.data![index].productQty
-                                                    .qty1,
-                                                snapshot.data![index].productQty
-                                                    .qty2,
-                                                snapshot.data![index].productQty
-                                                    .qty3,
-                                              ].map((dropdownValue) {
-                                                // print(dropdownValue);
-                                                return DropdownMenuItem<String>(
-                                                  value: dropdownValue,
-                                                  child: Text(dropdownValue),
-                                                );
-                                              }).toList(),
-                                              onChanged:
-                                                  (String? newDropdownValue) {
-                                                setState(() {
-                                                  dropdownValue =
-                                                      newDropdownValue;
-                                                  print(dropdownValue);
-                                                });
+                                            const SizedBox(height: 10),
+                                            DropdownButtonHideUnderline(
+                                              child: DropdownButton<String>(
+                                                items: <String>[
+                                                  ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].
+                                                  productType.type1),
+                                                  ('\$ '+ snapshot.data![index].price +' '+ snapshot.data![index].productType
+                                                      .type2),
+                                                  ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].productType
+                                                      .type3),
+                                                ].map((dropValue) {
+
+                                                  // print(dropdownValue);
+                                                  return DropdownMenuItem<String>(
+                                                    value: dropValue,
+                                                    child: Text(dropValue),
+                                                  );
+                                                }).toList(),
+                                                onChanged:
+                                                    (String? newDropdownValue) {
+                                                  setState(() {
+                                                    dropdownValue =
+                                                    newDropdownValue!;
+                                                    print(dropdownValue);
+                                                  });
+                                                },
+                                                value:dropdownValue ?? ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].
+                                                productType.type1),
+                                              ),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            InkWell(
+                                              onTap: () {
+                                                AddToBasket(context,snapshot.data![index]);
                                               },
-                                              value: dropdownValue,
+                                              child: Container(
+                                                width: 125,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                    const Color(0xFF297903),
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        20.0)),
+                                                child: const Center(
+                                                    child: Text(
+                                                      'add to cart',
+                                                      style: TextStyle(
+                                                          fontFamily: 'BebasNeue',
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          InkWell(
-                                            onTap: () {
-                                              AddToBasket(context,snapshot.data![index]);
-                                            },
-                                            child: Container(
-                                              width: 125,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFF297903),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                              child: const Center(
-                                                  child: Text(
-                                                'add to cart',
-                                                style: TextStyle(
-                                                    fontFamily: 'BebasNeue',
-                                                    fontSize: 15,
-                                                    color: Colors.white),
-                                              )),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            const Divider(
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
+                              const Divider(
+                                color: Colors.grey,
+                              ),
+                            ],
+                          )
+
+
                       ),
                     ],
                   );

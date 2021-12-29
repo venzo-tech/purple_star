@@ -3,20 +3,20 @@ import 'dart:convert';
 List<Product> postFromJson(String str) =>
     List<Product>.from(json.decode(str).map((x) => Product.fromMap(x)));
 
-class ProductQty {
-  String qty1;
-  String qty2;
-  String qty3;
+class ProductType {
+  String type1;
+  String type2;
+  String type3;
 
-  ProductQty(this.qty1, this.qty2, this.qty3);
+  ProductType(this.type1, this.type2, this.type3);
 
-  factory ProductQty.fromJson(dynamic json) {
-    return ProductQty(json['qty1'] as String, json['qty2'] as String,json['qty3'] as String);
+  factory ProductType.fromJson(dynamic json) {
+    return ProductType(json['type1'] as String, json['type2'] as String,json['type3'] as String);
   }
 
   @override
   String toString() {
-    return '{ $qty1, $qty2, $qty3 }';
+    return '{ $type1, $type2, $type3 }';
   }
 }
 
@@ -27,7 +27,8 @@ class Product {
     required this.made,
     required this.productImageUrl,
     required this.strains,
-    required this.productQty,
+    required this.price,
+    required this.productType,
   });
 
   int productId;
@@ -35,7 +36,8 @@ class Product {
   String made;
   String productImageUrl;
   String strains;
-  ProductQty productQty;
+  String price;
+  ProductType productType;
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
       productId: json["productId"],
@@ -43,5 +45,6 @@ class Product {
       made: json["made"],
       productImageUrl: json["productImageUrl"],
       strains: json["strains"],
-      productQty: ProductQty.fromJson(json["productQty"]));
+      price: json["price"],
+      productType: ProductType.fromJson(json["productType"]));
 }
