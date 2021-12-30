@@ -114,7 +114,7 @@ class _MenuPageState extends State<MenuPage> {
                       children: <Widget>[
                         InkWell(
                           onTap: (){
-                            print(item);
+                            // print(item);
                             if(item == 'Concentrates'){
                               Navigator.push(
                                 context,

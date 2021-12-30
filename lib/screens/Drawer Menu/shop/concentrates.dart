@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:purple_star/screens/Model/product_model.dart';
 import 'package:purple_star/screens/Services/product_services.dart';
+import 'package:purple_star/screens/cart/add_to_basket.dart';
 
 class Concentrates extends StatefulWidget {
   const Concentrates({Key? key}) : super(key: key);
@@ -12,14 +13,12 @@ class Concentrates extends StatefulWidget {
 
 class _ConcentratesState extends State<Concentrates> {
   late Future<List<Product>> futureProduct;
-  String? dropdownValue;
+   String? dropdownValue;
 
   @override
   void initState() {
     super.initState();
     futureProduct = fetchProduct();
-    // print(futureProduct);
-    // print(futureProduct.toString());
   }
 
   @override
@@ -117,10 +116,10 @@ class _ConcentratesState extends State<Concentrates> {
                       ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        physics: ScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) => Container(
-                          child: Column(
+                        itemBuilder: (_, index) =>
+                            Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
@@ -132,26 +131,26 @@ class _ConcentratesState extends State<Concentrates> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                               0.0), //or 15.0
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 100.0,
                                             width: 100.0,
                                             child: Image(
                                               image: NetworkImage(snapshot
-                                                  .data![index]
-                                                  .productImageUrl),
+                                                  .data![index].productImageUrl),
                                             ),
                                           ),
                                         ),
                                         Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               snapshot.data![index].title,
@@ -172,51 +171,56 @@ class _ConcentratesState extends State<Concentrates> {
                                             const SizedBox(height: 10),
                                             DropdownButtonHideUnderline(
                                               child: DropdownButton<String>(
-                                                // isExpanded: true,
                                                 items: <String>[
-                                                  snapshot.data![index]
-                                                      .productQty.qty1,
-                                                  snapshot.data![index]
-                                                      .productQty.qty2,
-                                                  snapshot.data![index]
-                                                      .productQty.qty3,
-                                                ].map((dropdownValue) {
+                                                  ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].
+                                                  productType.type1),
+                                                  ('\$ '+ snapshot.data![index].price +' '+ snapshot.data![index].productType
+                                                      .type2),
+                                                  ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].productType
+                                                      .type3),
+                                                ].map((dropValue) {
+
                                                   // print(dropdownValue);
-                                                  return DropdownMenuItem<
-                                                      String>(
-                                                    value: dropdownValue,
-                                                    child: Text(dropdownValue),
+                                                  return DropdownMenuItem<String>(
+                                                    value: dropValue,
+                                                    child: Text(dropValue),
                                                   );
                                                 }).toList(),
                                                 onChanged:
                                                     (String? newDropdownValue) {
                                                   setState(() {
                                                     dropdownValue =
-                                                        newDropdownValue;
+                                                    newDropdownValue!;
                                                     print(dropdownValue);
                                                   });
                                                 },
-                                                value: dropdownValue,
+                                                value:dropdownValue ?? ('\$ '+ snapshot.data![index].price +' '+snapshot.data![index].
+                                                productType.type1),
                                               ),
                                             ),
                                             const SizedBox(height: 10),
-                                            Container(
-                                              width: 125,
-                                              height: 30,
-                                              decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFF297903),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                              child:const Center(
-                                                  child: Text(
-                                                'add to cart',
-                                                style: TextStyle(
-                                                    fontFamily: 'BebasNeue',
-                                                    fontSize: 15,
-                                                    color: Colors.white),
-                                              )),
+                                            InkWell(
+                                              onTap: () {
+                                                AddToBasket(context,snapshot.data![index]);
+                                              },
+                                              child: Container(
+                                                width: 125,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                    const Color(0xFF297903),
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        20.0)),
+                                                child: const Center(
+                                                    child: Text(
+                                                      'add to cart',
+                                                      style: TextStyle(
+                                                          fontFamily: 'BebasNeue',
+                                                          fontSize: 15,
+                                                          color: Colors.white),
+                                                    )),
+                                              ),
                                             ),
                                           ],
                                         )
@@ -229,13 +233,14 @@ class _ConcentratesState extends State<Concentrates> {
                                 color: Colors.grey,
                               ),
                             ],
-                          ),
-                        ),
+                          )
+
+
                       ),
                     ],
                   );
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
               },
             ),
@@ -244,4 +249,90 @@ class _ConcentratesState extends State<Concentrates> {
       ),
     );
   }
+
+  // Future<void> AddToBasket(Product product) async {
+  //   showModalBottomSheet<void>(
+  //     backgroundColor: Colors.transparent,
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return Padding(
+  //         padding: const EdgeInsets.all(20.0),
+  //         child: Container(
+  //           height: MediaQuery.of(context).size.height * .80,
+  //           decoration: const BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.only(
+  //                   topLeft: Radius.circular(15.0),
+  //                   topRight: Radius.circular(15.0))),
+  //           child: Padding(
+  //             padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+  //             child: Column(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: <Widget>[
+  //                 const Text(
+  //                   'added to basket',
+  //                   style: TextStyle(fontFamily: 'BebasNeue', fontSize: 23),
+  //                 ),
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                   children: <Widget>[
+  //                     ClipRRect(
+  //                       borderRadius: BorderRadius.circular(
+  //                           0.0), //or 15.0
+  //                       child: SizedBox(
+  //                         height: 100.0,
+  //                         width: 100.0,
+  //                         child: Image(
+  //                           image: NetworkImage(product.productImageUrl),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                     Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Text(product.title),
+  //                         Text('-'+product.made),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 const SizedBox(
+  //                   height: 20,
+  //                 ),
+  //                 SizedBox(
+  //                   width: double.infinity,
+  //                   child: ElevatedButton(
+  //                     style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+  //                     child: const Text('Proceed to checkout',
+  //                         style:
+  //                         TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
+  //                     onPressed: () => Navigator.pop(context),
+  //                   ),
+  //                 ),
+  //                 SizedBox(
+  //                   width: double.infinity,
+  //                   child: ElevatedButton(
+  //                     style: ElevatedButton.styleFrom(
+  //                       primary: Colors.white,
+  //                       onPrimary: const Color(0xFF562c8a),
+  //                       side: const BorderSide(
+  //                           width: 2.0, color: Color(0xFF562c8a)),
+  //                       shape: const StadiumBorder(),
+  //                     ),
+  //                     child: const Text('Continue shopping',
+  //                         style:
+  //                         TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
+  //                     onPressed: () => Navigator.pop(context),
+  //                   ),
+  //                 )
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 }
+
+
