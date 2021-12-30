@@ -102,17 +102,48 @@ class _MainHomePageState extends State<MainHomePage> {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height,
-                    child: GridView.count(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 4.0,
-                          mainAxisSpacing: 8.0,
-                          children: List.generate(category.length, (index) {
-                            return Center(
-                              child: SelectCategory(categoryModel: category[index]),
-                            );
-                          }
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      child: GridView.count(
+                        // shrinkWrap: true,
+                            crossAxisCount: 3,
+                            // crossAxisSpacing: 2.0,
+                            mainAxisSpacing: 8.0,
+                            children: List.generate(category.length, (index) {
+                              return Center(
+                                child: SelectCategory(categoryModel: category[index]),
+                              );
+                            }
+                            ),
+                        ),
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:  <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(25, 10, 15, 10),
+                    child: Text('video review', style: TextStyle(fontFamily: 'BebasNeue', fontSize: 28),),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      child: GridView.count(
+                        // shrinkWrap: true,
+                        crossAxisCount: 3,
+                        // crossAxisSpacing: 2.0,
+                        mainAxisSpacing: 8.0,
+                        children: List.generate(category.length, (index) {
+                          return Center(
+                            child: SelectCategory(categoryModel: category[index]),
+                          );
+                        }
+                        ),
                       ),
+                    ),
                   ),
                 ],
               )

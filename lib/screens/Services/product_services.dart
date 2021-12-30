@@ -13,6 +13,6 @@ Future<List<Product>> fetchProduct() async {
     print(parsed);
     return parsed.map<Product>((json) => Product.fromMap(json)).toList();
   } else {
-    throw Exception('Failed to load album');
+    throw Exception('Failed to load Products');
   }
 }
