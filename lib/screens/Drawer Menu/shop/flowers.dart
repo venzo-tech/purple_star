@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Flowers extends StatefulWidget {
-  const Flowers({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Flowers({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _FlowersState createState() => _FlowersState();

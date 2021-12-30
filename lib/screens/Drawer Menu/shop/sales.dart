@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Sales extends StatefulWidget {
-  const Sales({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Sales({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _SalesState createState() => _SalesState();

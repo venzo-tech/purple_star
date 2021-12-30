@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Tinctures extends StatefulWidget {
-  const Tinctures({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Tinctures({Key? key,required this.pageTitle}) : super(key: key);
 
   @override
   _TincturesState createState() => _TincturesState();

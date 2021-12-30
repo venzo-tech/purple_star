@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Edibles extends StatefulWidget {
-  const Edibles({Key? key}) : super(key: key);
+  final pageTitle;
+  const Edibles({Key? key, this.pageTitle}) : super(key: key);
 
   @override
   _EdiblesState createState() => _EdiblesState();

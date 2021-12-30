@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class VapePens extends StatefulWidget {
-  const VapePens({Key? key}) : super(key: key);
+  final String pageTitle;
+  const VapePens({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _VapePensState createState() => _VapePensState();

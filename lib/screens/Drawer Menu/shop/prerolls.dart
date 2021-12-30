@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Prerolls extends StatefulWidget {
-  const Prerolls({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Prerolls({Key? key,required this.pageTitle}) : super(key: key);
 
   @override
   _PrerollsState createState() => _PrerollsState();
