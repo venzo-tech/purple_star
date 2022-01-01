@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:purple_star/screens/age_restrict_page.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           primary: Color(0xFF562c8A),
         ),
       ),
-home: AgeRestrictPage(),
+home: const AgeRestrictPage(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

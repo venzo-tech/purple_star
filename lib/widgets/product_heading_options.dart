@@ -17,9 +17,9 @@ class _ProductHeadingAndOptionsState extends State<ProductHeadingAndOptions> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'concentrates',
-            style: TextStyle(fontSize: 30, fontFamily: 'BebasNeue'),
+          Text(
+            widget.title,
+            style:const TextStyle(fontSize: 30, fontFamily: 'BebasNeue'),
           ),
           Row(
             children: [

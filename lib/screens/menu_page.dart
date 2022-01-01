@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:get/get.dart';
 import 'package:purple_star/screens/Drawer%20Menu/about.dart';
 import 'package:purple_star/screens/Drawer%20Menu/account.dart';
 import 'package:purple_star/screens/Drawer%20Menu/Blog/blog.dart';
@@ -107,7 +108,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
               children: <Widget>[
                 for (var item in ShopSubMenu)
-                  // Text(item)
+                // Text(item)
                   Padding(
                     padding: const EdgeInsets.only(left: 40),
                     child: Column(
@@ -116,57 +117,36 @@ class _MenuPageState extends State<MenuPage> {
                           onTap: (){
                             // print(item);
                             if(item == 'Concentrates'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Concentrates(pageTitle: item)),
-                              );
+                              Get.to(() => Concentrates(pageTitle: item));
                             }else if(item == 'Edibles'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Edibles(pageTitle: item)),
-                              );
+                              Get.to(() => Edibles(pageTitle: item));
                             }else if(item == 'Flowers'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Flowers(pageTitle: item)),
-                              );
+                              Get.to(() => Flowers(pageTitle: item));
                             }else if(item == 'Prerolls'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Prerolls(pageTitle: item)),
-                              );
+                              Get.to(() => Prerolls(pageTitle: item));
                             }else if(item == 'Tinctures'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Tinctures(pageTitle: item)),
-                              );
+                              Get.to(() => Tinctures(pageTitle: item));
                             }else if(item == 'Topicals'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Topicals(pageTitle: item)),
-                              );
+                              Get.to(() => Topicals(pageTitle: item));
                             }else if(item == 'Vape Pens'){
+                              Get.to(() => VapePens(pageTitle: item));
+                            }else if(item == 'Accessories'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => VapePens(pageTitle: item)),
+                                MaterialPageRoute(builder: (context) => Accessories(pageTitle: item)),
                               );
-                            }else if(item == 'Accessories'){
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Accessories(pageTitle: item)),
-                            );
                             }else  if(item == 'Sales'){
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Sales(pageTitle: item)),
-                            );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Sales(pageTitle: item)),
+                              );
                             }
 
                           },
                           child: ListTile(
                             trailing: const Icon(Icons.chevron_right),
                             visualDensity:
-                                const VisualDensity(horizontal: 0, vertical: -4),
+                            const VisualDensity(horizontal: 0, vertical: -4),
                             title: Text(
                               item,
                               style: const TextStyle(
@@ -186,56 +166,38 @@ class _MenuPageState extends State<MenuPage> {
               children: <Widget>[
                 for (var item in menuItems)
                   Column(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: (){
-                            print(item);
-                            if(item == 'Order History'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const OrderHistory()),
-                              );
-                            }else if(item == 'Account'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>const Account()),
-                              );
-                            }else if(item == 'Help'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>const Help()),
-                              );
-                            }else if(item == 'Blog'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>const Blog()),
-                              );
-                            }else if(item == 'About'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>const About()),
-                              );
-                            }else if(item == 'Settings'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>const Settings()),
-                              );
-                            }
-                          },
-                          child: ListTile(
-                            trailing: const Icon(Icons.chevron_right),
-                            title: Text(
-                              item,
-                              style:const TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.black, fontWeight: FontWeight.bold),
-                            ),
+                    children: <Widget>[
+                      InkWell(
+                        onTap: (){
+                          print(item);
+                          if(item == 'Order History'){
+                            Get.to(() => const OrderHistory());
+                          }else if(item == 'Account'){
+                            Get.to(() =>const Account());
+                          }else if(item == 'Help'){
+                            Get.to(() =>const Help());
+                          }else if(item == 'Blog'){
+                            Get.to(() =>const Blog());
+                          }else if(item == 'About'){
+                            Get.to(() =>const About());
+                          }else if(item == 'Settings'){
+                            Get.to(() =>const Settings());
+                          }
+                        },
+                        child: ListTile(
+                          trailing: const Icon(Icons.chevron_right),
+                          title: Text(
+                            item,
+                            style:const TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Poppins',
+                                color: Colors.black, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        const Divider(indent: 0, height: 1, color: Color(0xffa3a3a3)),
-                      ],
-                    ),
+                      ),
+                      const Divider(indent: 0, height: 1, color: Color(0xffa3a3a3)),
+                    ],
+                  ),
               ],
             ),
           ],

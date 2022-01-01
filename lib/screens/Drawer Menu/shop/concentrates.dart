@@ -21,7 +21,7 @@ class _ConcentratesState extends State<Concentrates> {
       appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             ProductHeadingAndOptions(title: widget.pageTitle,),
            const ProductListView(),
           ],
