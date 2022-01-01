@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Topicals extends StatefulWidget {
-  const Topicals({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Topicals({Key? key,required this.pageTitle}) : super(key: key);
 
   @override
   _TopicalsState createState() => _TopicalsState();

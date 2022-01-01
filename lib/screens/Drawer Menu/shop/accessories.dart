@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Accessories extends StatefulWidget {
-  const Accessories({Key? key}) : super(key: key);
+  final String pageTitle;
+  const Accessories({Key? key, required this.pageTitle}) : super(key: key);
 
   @override
   _AccessoriesState createState() => _AccessoriesState();

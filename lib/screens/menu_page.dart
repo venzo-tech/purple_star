@@ -118,47 +118,47 @@ class _MenuPageState extends State<MenuPage> {
                             if(item == 'Concentrates'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const Concentrates()),
+                                MaterialPageRoute(builder: (context) => Concentrates(pageTitle: item)),
                               );
                             }else if(item == 'Edibles'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const Edibles()),
+                                MaterialPageRoute(builder: (context) => Edibles(pageTitle: item)),
                               );
                             }else if(item == 'Flowers'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const Flowers()),
+                                MaterialPageRoute(builder: (context) => Flowers(pageTitle: item)),
                               );
                             }else if(item == 'Prerolls'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const Prerolls()),
+                                MaterialPageRoute(builder: (context) => Prerolls(pageTitle: item)),
                               );
                             }else if(item == 'Tinctures'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const Tinctures()),
+                                MaterialPageRoute(builder: (context) => Tinctures(pageTitle: item)),
                               );
                             }else if(item == 'Topicals'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const Topicals()),
+                                MaterialPageRoute(builder: (context) => Topicals(pageTitle: item)),
                               );
                             }else if(item == 'Vape Pens'){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>const VapePens()),
+                                MaterialPageRoute(builder: (context) => VapePens(pageTitle: item)),
                               );
                             }else if(item == 'Accessories'){
                             Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>const Accessories()),
+                            MaterialPageRoute(builder: (context) => Accessories(pageTitle: item)),
                             );
                             }else  if(item == 'Sales'){
                             Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>const Sales()),
+                            MaterialPageRoute(builder: (context) => Sales(pageTitle: item)),
                             );
                             }
 
