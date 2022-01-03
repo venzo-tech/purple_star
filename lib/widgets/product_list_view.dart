@@ -26,7 +26,7 @@ class _ProductListViewState extends State<ProductListView> {
     return FutureBuilder<List<Product>>(
       future: futureProduct,
       builder: (context, snapshot) {
-        // print(snapshot);
+        print(snapshot);
         if (snapshot.hasData) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

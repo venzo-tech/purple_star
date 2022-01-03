@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purple_star/screens/Model/product_model.dart';
-import 'package:purple_star/screens/Services/product_services.dart';
 import 'package:purple_star/screens/cart/cart_checkout_page.dart';
 import 'package:purple_star/screens/cart/cart_controller.dart';
 import 'package:purple_star/widgets/app_bar_widget.dart';
@@ -113,17 +112,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                                     cartController.addProduct(widget.product);
                                   },
                                     child: Icon(Icons.add,size: 20,)),
-
-                                // IconButton(onPressed: (){
-                                //   setState(() {
-                                //     quantity=quantity+1;
-                                //     print(quantity);
-                                //   });
-                                // }, icon:const Icon(Icons.add)),
                               ],
                             ),
                           ),),
-                        Text(calculatePrice(quantity).toString()),
+                        const Text('Total Value'),
                       ],
                     ),
                     SizedBox(
@@ -151,16 +143,5 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         ),
       )
     ),);
-  }
-
-double calculatePrice(int quantity) {
-    double totalPrice=0.0;
-    double pp = double.parse(widget.product.price);
-    setState(() {
-      totalPrice = pp * quantity;
-    });
-    print(totalPrice);
-    return totalPrice;
-    // return Text("\$ ${totalPrice.toString()}", style:const TextStyle(fontSize: 25, fontFamily: 'BebasNeue', color: Color(0xff562c8a)),);
   }
 }

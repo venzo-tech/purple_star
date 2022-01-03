@@ -3,7 +3,7 @@ import 'package:purple_star/screens/Model/product_model.dart';
 
 class CartController extends GetxController{
 
-  var _products = {}.obs;
+  final _products = {}.obs;
 
   void addProduct(Product product){
     if(_products.containsKey(product)){
@@ -33,10 +33,10 @@ class CartController extends GetxController{
       .map((product) => product.key.price * product.value)
       .toList();
 
+
   get total => _products.entries
       .map((product) => product.key.price * product.value)
       .toList()
       .reduce((value, element) => value + element)
       .toStringAsFixed(2);
-
 }

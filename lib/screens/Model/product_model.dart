@@ -11,7 +11,8 @@ class ProductType {
   ProductType(this.type1, this.type2, this.type3);
 
   factory ProductType.fromJson(dynamic json) {
-    return ProductType(json['type1'] as String, json['type2'] as String,json['type3'] as String);
+    return ProductType(json['type1'] as String, json['type2'] as String,
+        json['type3'] as String);
   }
 
   @override
@@ -31,20 +32,20 @@ class Product {
     required this.productType,
   });
 
-  int productId;
-  String title;
-  String made;
-  String productImageUrl;
-  String strains;
-  String price;
+  final int productId;
+  final String title;
+  final String made;
+  final String productImageUrl;
+  final String strains;
+  final double price;
   ProductType productType;
 
   factory Product.fromMap(Map<String, dynamic> json) => Product(
-      productId: json["productId"],
-      title: json["title"],
-      made: json["made"],
-      productImageUrl: json["productImageUrl"],
-      strains: json["strains"],
-      price: json["price"],
+      productId: json["productId"] as int,
+      title: json["title"] as String,
+      made: json["made"] as String,
+      productImageUrl: json["productImageUrl"] as String,
+      strains: json["strains"] as String,
+      price: double.tryParse(json["price"])!,
       productType: ProductType.fromJson(json["productType"]));
 }
