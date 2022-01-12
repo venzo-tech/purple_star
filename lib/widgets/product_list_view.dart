@@ -26,7 +26,7 @@ class _ProductListViewState extends State<ProductListView> {
     return FutureBuilder<List<Product>>(
       future: futureProduct,
       builder: (context, snapshot) {
-        print(snapshot);
+        // print(snapshot);
         if (snapshot.hasData) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ class _ProductListViewState extends State<ProductListView> {
                     final defaultValue = selectedItemValue[0];
                     return InkWell(
                       onTap: () {
-                        print(snapshot.data![index].productImageUrl);
+                        // print(snapshot.data![index].productImageUrl);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

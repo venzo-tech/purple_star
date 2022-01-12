@@ -68,7 +68,7 @@ Future<void> AddToBasket( BuildContext context,Product product) async {
                         style:
                         TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
                     onPressed: () {
-                      Get.to(() => const CheckoutScreen());
+                      Get.to(() => CheckoutScreen());
                     },
                   ),
                 ),

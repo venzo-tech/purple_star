@@ -6,34 +6,36 @@ class CartTotalWidget extends StatelessWidget {
   final CartController controller = Get.find();
   CartTotalWidget({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    print('Subtotal: ${controller.productSubtotal}');
-    print(controller.total);
-    return Obx(
-          () => Container(
-          padding: const EdgeInsets.symmetric(horizontal: 75),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-             const Text(
-                'Total',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+  return Obx(
+        () => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 75),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              'Total',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                '\$${controller.total}',
-                style:const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          )),
+            ),
+            controller.total == null ? totalValue(0) : totalValue(controller.total),
+          ],
+        )),
+  );
+  }
+
+  totalValue(total) {
+    return Text(
+      '\$$total',
+      style:const TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

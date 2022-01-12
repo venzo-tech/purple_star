@@ -126,7 +126,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             style:
                             TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
                         onPressed: () {
-                          Get.to(() => const CheckoutScreen());
+                          Get.to(() =>  CheckoutScreen());
                         },
                       ),
                     ),

@@ -130,18 +130,11 @@ class _MenuPageState extends State<MenuPage> {
                               Get.to(() => Topicals(pageTitle: item));
                             }else if(item == 'Vape Pens'){
                               Get.to(() => VapePens(pageTitle: item));
-                            }else if(item == 'Accessories'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Accessories(pageTitle: item)),
-                              );
-                            }else  if(item == 'Sales'){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Sales(pageTitle: item)),
-                              );
+                            }else if(item == 'Accessories') {
+                              Get.to(() => Accessories(pageTitle: item));
+                            } else  if(item == 'Sales') {
+                              Get.to(() => Sales(pageTitle: item));
                             }
-
                           },
                           child: ListTile(
                             trailing: const Icon(Icons.chevron_right),

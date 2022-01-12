@@ -10,20 +10,28 @@ class CheckOutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SizedBox(
-      height: 600,
-      child: ListView.builder(
-          shrinkWrap:true,
-          itemCount: controller.products.length,
-          itemBuilder: (BuildContext context, int index) {
-            print("controller ${controller.products.values.toList()[index]}");
-            return CartCheckOutCard(
-              controller: controller,
-              product: controller.products.keys.toList()[index],
-              quantity: controller.products.values.toList()[index],
-              index: index,
-            );
-          }),),);
+    int controllerLength = controller.products.values.toList().length;
+    if(controllerLength == 0){
+      return const SizedBox(
+        height: 600,
+        child:  Center(child: Text('Your Cart is Empty', style: TextStyle(fontSize: 20,fontFamily: 'Poppins'),)),);
+    }else{
+      return Obx(() => SizedBox(
+        height: 600,
+        child: ListView.builder(
+            shrinkWrap:true,
+            itemCount: controller.products.length,
+            itemBuilder: (BuildContext context, int index) {
+              print("controller ${controller.products.values.toList()[index]}");
+                return CartCheckOutCard(
+                  controller: controller,
+                  product: controller.products.keys.toList()[index],
+                  quantity: controller.products.values.toList()[index],
+                  index: index,
+                );
+            }),),);
+    }
+
   }
 }
 
