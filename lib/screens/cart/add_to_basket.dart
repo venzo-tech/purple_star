@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:purple_star/screens/Model/product_model.dart';
-import 'package:purple_star/screens/cart/cart_page.dart';
+import 'package:purple_star/screens/cart/cart_checkout_page.dart';
 
 Future<void> AddToBasket( BuildContext context,Product product) async {
   showModalBottomSheet<void>(
@@ -68,10 +68,7 @@ Future<void> AddToBasket( BuildContext context,Product product) async {
                         style:
                         TextStyle(fontFamily: 'BebasNeue', fontSize: 17)),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CartProductPage()),
-                      );
+                      Get.to(() => CheckoutScreen());
                     },
                   ),
                 ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:purple_star/screens/Drawer%20Menu/Help/help_detail_page.dart';
 import 'package:purple_star/screens/Model/help_model.dart';
 import 'package:purple_star/screens/Services/help_service.dart';
+import 'package:purple_star/widgets/app_bar_widget.dart';
+import 'package:purple_star/widgets/back_button.dart';
 
 class Help extends StatefulWidget {
   const Help({Key? key}) : super(key: key);
@@ -24,57 +26,13 @@ class _HelpState extends State<Help> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
-          ),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: 30,
-          child: const TextField(
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.transparent),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.transparent),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              hintText: 'Search Purple Star',
-              suffixIcon: Icon(Icons.search_sharp),
-            ),
-          ),
-        ),
-      ),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            //Back Button Start
-            Padding(
-              padding: const EdgeInsets.fromLTRB(13, 15, 15, 15),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.chevron_left, color: Color(0xff2d2d2d)), // icon
-                    Text(
-                      'Back',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', color: Color(0xff2d2d2d)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            //Back Button
+            const CustomBackButton(),
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
               child: Text(
@@ -87,7 +45,6 @@ class _HelpState extends State<Help> {
               height: 1,
               color: Color(0xffa3a3a3),
             ),
-//Back Button End,
             FutureBuilder<List<HelpModel>>(
               future: futureHelp,
               builder: (context, snapshot) {
