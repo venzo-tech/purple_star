@@ -23,7 +23,7 @@ class _SettingsState extends State<Settings> {
             //Back Button
             const CustomBackButton(),
             const Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+              padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
               child: Text(
                 'settings',
                 style: TextStyle(fontFamily: 'BebasNeue', fontSize: 30),

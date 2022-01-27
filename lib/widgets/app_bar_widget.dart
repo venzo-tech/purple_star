@@ -248,7 +248,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // automaticallyImplyLeading: false,
+      automaticallyImplyLeading: false,
       title: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         child:  CupertinoSearchTextField(

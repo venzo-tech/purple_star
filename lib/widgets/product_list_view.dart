@@ -3,6 +3,7 @@ import 'package:purple_star/screens/Model/product_model.dart';
 import 'package:purple_star/screens/Services/product_services.dart';
 import 'package:purple_star/screens/cart/add_to_basket.dart';
 import 'package:purple_star/screens/product_detail_page.dart';
+import 'package:purple_star/widgets/checkbox_filter.dart';
 import 'package:purple_star/widgets/custom_dropdown_button.dart';
 
 class ProductListView extends StatefulWidget {

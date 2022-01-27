@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_geofence/geofence.dart';
@@ -19,7 +19,8 @@ class MainHomePage extends StatefulWidget {
 
 class _MainHomePageState extends State<MainHomePage> {
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
 
   String? myVideoId = YoutubePlayer.convertUrlToId('https://youtu.be/BqbpZkgcaVQ');
   YoutubeMetaData _videoMetaData = const YoutubeMetaData();
@@ -35,21 +36,17 @@ class _MainHomePageState extends State<MainHomePage> {
       ),
     )..addListener(listener);
 
-
     initPlatformState();
 
 // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     var initializationSettingsAndroid =
-     const AndroidInitializationSettings('@drawable/splash.png');
-    final initializationSettingsIOS =
-    IOSInitializationSettings(onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    new AndroidInitializationSettings('app_icon');
+    var initializationSettingsIOS =
+    IOSInitializationSettings(onDidReceiveLocalNotification: null);
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: null);
-
-    addRegion();
-
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -70,33 +67,17 @@ class _MainHomePageState extends State<MainHomePage> {
     setState(() {});
   }
 
-  void scheduleNotification(String title, String subtitle) {
-    print("scheduling one with $title and $subtitle");
-    var rng = Random();
-    Future.delayed(const Duration(seconds: 5)).then((result) async {
-      var androidPlatformChannelSpecifics =const AndroidNotificationDetails(
-          'your channel id', 'your channel name',
-          importance: Importance.high,
-          priority: Priority.high,
-          ticker: 'ticker');
-      var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-      var platformChannelSpecifics = NotificationDetails(
-          android: androidPlatformChannelSpecifics,
-          iOS: iOSPlatformChannelSpecifics);
-      await flutterLocalNotificationsPlugin.show(
-          rng.nextInt(100000), title, subtitle, platformChannelSpecifics,
-          payload: 'item x');
-    });
-  }
-
  void listener() {
      setState(() {
        _videoMetaData = _controller.metadata;
      });
  }
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar:const AppBarWidget(),
 
@@ -262,8 +243,20 @@ class _MainHomePageState extends State<MainHomePage> {
                             child: ElevatedButton(
                               child: Text("Add region"),
                               onPressed: () {
-                                addRegion();
-
+                                // addRegion();
+                                Geolocation location = Geolocation(
+                                    latitude: 12.92516674641180,
+                                    longitude: 80.23158749732800,
+                                    radius: 50.0,
+                                    id: "Kerkplein13");
+                                Geofence.addGeolocation(location, GeolocationEvent.entry)
+                                    .then((onValue) {
+                                  print("great success");
+                                  scheduleNotification(
+                                      "Georegion added", "Your geofence has been added!");
+                                }).catchError((onError) {
+                                  print("great failure");
+                                });
                               },
                             ),
                           ),
@@ -275,7 +268,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                 Geolocation location = const Geolocation(
                                     latitude: 12.92516674641180,
                                     longitude: 80.23158749732800,
-                                    radius: 5.0,
+                                    radius: 50.0,
                                     id: "chennai");
                                 Geofence.addGeolocation(location, GeolocationEvent.entry)
                                     .then((onValue) {
@@ -352,45 +345,24 @@ class _MainHomePageState extends State<MainHomePage> {
     );
   }
 
-  void addRegion() {
-    Geolocation location = const Geolocation(
-        latitude: 12.9340720941953,
-        longitude: 80.16054060781092,
-        radius: 500.0,
-        id: "chennai");
-    Geofence.addGeolocation(location, GeolocationEvent.entry)
-        .then((onValue) {
-      print("great success");
-      scheduleNotification(
-          "Georegion added", "Your geofence has been added!");
-    }).catchError((onError) {
-      print("great failure");
-    });
-  }
 
-  void onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) async {
-    // display a dialog with the notification details, tap ok to go to another page
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title!),
-        content: Text(body!),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            child: Text('Ok'),
-            onPressed: () async {
-              Navigator.of(context, rootNavigator: true).pop();
-              // await Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => SecondScreen(payload),
-              //   ),
-              // );
-            },
-          )
-        ],
-      ),
-    );
-  }
+void scheduleNotification(String title, String subtitle) {
+  print("scheduling one with $title and $subtitle");
+  var rng = Random();
+  Future.delayed(Duration(seconds: 5)).then((result) async {
+    var androidPlatformChannelSpecifics =const AndroidNotificationDetails(
+        'your channel id', 'your channel name',
+        channelDescription:  'your channel description',
+        importance: Importance.high,
+        priority: Priority.high,
+        ticker: 'ticker');
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        rng.nextInt(100000), title, subtitle, platformChannelSpecifics,
+        payload: 'item x');
+  });
+}
 }

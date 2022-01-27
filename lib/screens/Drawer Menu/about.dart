@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:purple_star/widgets/app_bar_widget.dart';
+import 'package:purple_star/widgets/back_button.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -14,59 +16,15 @@ class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
-          ),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: 30,
-          child: const TextField(
-            style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.transparent),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.transparent),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              hintText: 'Search Purple Star',
-              suffixIcon: Icon(Icons.search_sharp),
-            ),
-          ),
-        ),
-      ),
+      appBar: const AppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
 //Back Button Start
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 40, 15, 15),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child:Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children:const [
-                     Icon(Icons.chevron_left,color: Color(0xff2d2d2d)), // icon
-                     Text(
-                      'Back',
-                      style: TextStyle(
-                          fontFamily: 'Poppins', color: Color(0xff2d2d2d)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const CustomBackButton(),
             const Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 0, 40),
+              padding: EdgeInsets.fromLTRB(20, 30, 0, 10),
               child: Text('About', style: TextStyle(fontFamily: 'BebasNeue', fontSize: 30),),
             ),
            const Divider(
